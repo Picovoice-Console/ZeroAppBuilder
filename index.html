@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroApp Builder - Create Android Apps at No Cost</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <!-- Animation library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container-fluid px-3">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i data-feather="codesandbox" class="me-2"></i>
+                <span class="fw-bold">ZeroApp</span>
+            </a>
+            
+            <div class="navbar-center d-none d-lg-flex">
+                <div class="repo-info d-flex align-items-center px-3 py-1 bg-dark rounded border border-secondary">
+                    <i data-feather="smartphone" class="text-secondary me-2 feather-sm"></i>
+                    <span class="text-light me-2" id="navProjectName">App Builder</span>
+                    <span class="text-secondary ms-1 small">•</span>
+                    <span class="badge bg-success ms-2 small">Ready</span>
+                </div>
+            </div>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn-nav" href="#" id="newProjectBtn">
+                            <i data-feather="file-plus" class="feather-sm me-1"></i> New
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-nav" href="#" id="loadProjectBtn">
+                            <i data-feather="folder" class="feather-sm me-1"></i> Open
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-nav" href="#" id="exportBtn">
+                            <i data-feather="download" class="feather-sm me-1"></i> Export
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-nav" href="#" id="downloadSourceBtn">
+                            <i data-feather="code" class="feather-sm me-1"></i> Download Source
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-nav" href="#" id="aiAssistBtn">
+                            <i data-feather="cpu" class="feather-sm me-1"></i> AI
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="nav-divider mx-2"></div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-nav" href="#" id="toggleThemeBtn">
+                            <i data-feather="moon" class="feather-sm"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-nav" href="#" data-bs-toggle="modal" data-bs-target="#helpModal">
+                            <i data-feather="help-circle" class="feather-sm"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid main-container">
+        <div class="row h-100">
+            <!-- Left Sidebar with Tabs -->
+            <div class="col-md-2 left-sidebar p-0">
+                <div class="left-sidebar-tabs">
+                    <div class="tab-btn active" data-tab="components-tab">
+                        <i data-feather="grid"></i>
+                        <span class="tab-label">Components</span>
+                    </div>
+                    <div class="tab-btn" data-tab="files-tab">
+                        <i data-feather="folder"></i>
+                        <span class="tab-label">Files</span>
+                    </div>
+                    <div class="tab-btn" data-tab="assets-tab">
+                        <i data-feather="image"></i>
+                        <span class="tab-label">Assets</span>
+                    </div>
+                </div>
+                
+                <!-- Components Tab -->
+                <div class="tab-content active" id="components-tab">
+                    <div class="sidebar-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="m-0">Components</h5>
+                            <button class="btn btn-sm btn-icon" id="collapseAllBtn">
+                                <i data-feather="chevrons-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="components-list">
+                        <div class="component-group">
+                            <div class="component-group-header">
+                                <h6>Layout</h6>
+                                <i data-feather="chevron-down" class="group-toggle"></i>
+                            </div>
+                            <div class="component-group-content">
+                                <div class="component-item" draggable="true" data-component="container">
+                                    <i data-feather="layout"></i> Container
+                                </div>
+                                <div class="component-item" draggable="true" data-component="row">
+                                    <i data-feather="columns"></i> Row
+                                </div>
+                                <div class="component-item" draggable="true" data-component="stack">
+                                    <i data-feather="layers"></i> Stack
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component-group">
+                            <div class="component-group-header">
+                                <h6>UI Elements</h6>
+                                <i data-feather="chevron-down" class="group-toggle"></i>
+                            </div>
+                            <div class="component-group-content">
+                                <div class="component-item" draggable="true" data-component="button">
+                                    <i data-feather="square"></i> Button
+                                </div>
+                                <div class="component-item" draggable="true" data-component="text">
+                                    <i data-feather="type"></i> Text
+                                </div>
+                                <div class="component-item" draggable="true" data-component="image">
+                                    <i data-feather="image"></i> Image
+                                </div>
+                                <div class="component-item" draggable="true" data-component="input">
+                                    <i data-feather="edit-3"></i> Input
+                                </div>
+                                <div class="component-item" draggable="true" data-component="card">
+                                    <i data-feather="credit-card"></i> Card
+                                </div>
+                                <div class="component-item" draggable="true" data-component="divider">
+                                    <i data-feather="minus"></i> Divider
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component-group">
+                            <div class="component-group-header">
+                                <h6>Functionality</h6>
+                                <i data-feather="chevron-down" class="group-toggle"></i>
+                            </div>
+                            <div class="component-group-content">
+                                <div class="component-item" draggable="true" data-component="list">
+                                    <i data-feather="list"></i> List
+                                </div>
+                                <div class="component-item" draggable="true" data-component="navigation">
+                                    <i data-feather="menu"></i> Navigation
+                                </div>
+                                <div class="component-item" draggable="true" data-component="webview">
+                                    <i data-feather="globe"></i> Web View
+                                </div>
+                                <div class="component-item" draggable="true" data-component="form">
+                                    <i data-feather="clipboard"></i> Form
+                                </div>
+                                <div class="component-item" draggable="true" data-component="map">
+                                    <i data-feather="map"></i> Map
+                                </div>
+                                <div class="component-item" draggable="true" data-component="slider">
+                                    <i data-feather="sliders"></i> Slider
+                                </div>
+                            </div>
+                        </div>
+                        <div class="component-group">
+                            <div class="component-group-header">
+                                <h6>Data</h6>
+                                <i data-feather="chevron-down" class="group-toggle"></i>
+                            </div>
+                            <div class="component-group-content">
+                                <div class="component-item" draggable="true" data-component="datatable">
+                                    <i data-feather="database"></i> Data Table
+                                </div>
+                                <div class="component-item" draggable="true" data-component="chart">
+                                    <i data-feather="bar-chart-2"></i> Chart
+                                </div>
+                                <div class="component-item" draggable="true" data-component="api">
+                                    <i data-feather="server"></i> API Connection
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Files Tab -->
+                <div class="tab-content" id="files-tab">
+                    <div class="sidebar-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="m-0">Project Files</h5>
+                            <div>
+                                <button class="btn btn-sm btn-icon" id="newFileBtn" title="New File">
+                                    <i data-feather="file-plus"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon" id="newFolderBtn" title="New Folder">
+                                    <i data-feather="folder-plus"></i>
+                                </button>
+                                <button class="btn btn-sm btn-icon" id="refreshFilesBtn" title="Refresh">
+                                    <i data-feather="refresh-cw"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="files-tree">
+                        <div class="file-search">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text bg-transparent border-end-0">
+                                    <i data-feather="search" class="search-icon"></i>
+                                </span>
+                                <input type="text" class="form-control border-start-0" placeholder="Search files..." id="fileSearch">
+                            </div>
+                        </div>
+                        <div class="file-tree-container" id="fileTreeContainer">
+                            <!-- File tree will be populated dynamically -->
+                            <div class="empty-state">
+                                <p class="text-center text-muted">Your project files will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Assets Tab -->
+                <div class="tab-content" id="assets-tab">
+                    <div class="sidebar-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="m-0">Assets</h5>
+                            <button class="btn btn-sm btn-icon" id="uploadAssetBtn">
+                                <i data-feather="upload"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="assets-container">
+                        <div class="asset-category">
+                            <div class="asset-category-header">
+                                <h6>Images</h6>
+                                <span class="asset-count">0</span>
+                            </div>
+                            <div class="asset-grid" id="imageAssets">
+                                <!-- Assets will be populated dynamically -->
+                                <div class="empty-state">
+                                    <p class="text-center text-muted">No images uploaded yet</p>
+                                    <button class="btn btn-sm btn-outline-secondary mt-2">Upload Image</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="asset-category">
+                            <div class="asset-category-header">
+                                <h6>Icons</h6>
+                                <span class="asset-count">0</span>
+                            </div>
+                            <div class="asset-grid" id="iconAssets">
+                                <!-- Icons will be populated dynamically -->
+                                <div class="empty-state">
+                                    <p class="text-center text-muted">No icons uploaded yet</p>
+                                    <button class="btn btn-sm btn-outline-secondary mt-2">Upload Icon</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="asset-category">
+                            <div class="asset-category-header">
+                                <h6>Fonts</h6>
+                                <span class="asset-count">0</span>
+                            </div>
+                            <div class="asset-list" id="fontAssets">
+                                <!-- Fonts will be populated dynamically -->
+                                <div class="empty-state">
+                                    <p class="text-center text-muted">No custom fonts added yet</p>
+                                    <button class="btn btn-sm btn-outline-secondary mt-2">Add Font</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Builder Canvas (Middle) -->
+            <div class="col-md-7 builder-canvas">
+                <div class="builder-header">
+                    <div class="d-flex align-items-center">
+                        <div class="screen-selector">
+                            <select class="form-select" id="screenSelector">
+                                <option value="mainScreen">Main Screen</option>
+                                <option value="addScreen">+ Add Screen</option>
+                            </select>
+                        </div>
+                        <div class="ms-3">
+                            <button class="btn btn-sm btn-outline-secondary" id="screenSettingsBtn" title="Screen Settings">
+                                <i data-feather="settings"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="device-preview-controls">
+                        <button class="btn btn-outline-secondary btn-sm" id="previewMobile" title="Phone Preview">
+                            <i data-feather="smartphone"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm" id="previewTablet" title="Tablet Preview">
+                            <i data-feather="tablet"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm ms-1" id="livePreviewBtn" title="Live Preview">
+                            <i data-feather="play"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="canvas-container">
+                    <div id="appCanvas" class="app-canvas phone-preview">
+                        <div class="canvas-placeholder">
+                            <div class="placeholder-content">
+                                <i data-feather="layout" class="mb-3"></i>
+                                <p>Drag and drop components here to start building your app</p>
+                                <button class="btn btn-primary btn-sm mt-2" id="startTemplateBtn">
+                                    <i data-feather="package" class="me-1"></i> Start With Template
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="builder-footer">
+                    <div class="breadcrumb-navigation">
+                        <span class="breadcrumb-item"><i data-feather="smartphone" class="feather-xsm me-1"></i> Main Screen</span>
+                    </div>
+                    <div class="zoom-controls">
+                        <button class="btn btn-sm btn-icon" id="zoomOutBtn">
+                            <i data-feather="zoom-out"></i>
+                        </button>
+                        <span class="zoom-level">100%</span>
+                        <button class="btn btn-sm btn-icon" id="zoomInBtn">
+                            <i data-feather="zoom-in"></i>
+                        </button>
+                        <button class="btn btn-sm btn-icon ms-1" id="zoomResetBtn">
+                            <i data-feather="maximize"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Properties Panel (Right) -->
+            <div class="col-md-3 properties-panel">
+                <div class="properties-tabs">
+                    <div class="prop-tab-btn active" data-tab="properties-tab-content">Properties</div>
+                    <div class="prop-tab-btn" data-tab="styles-tab-content">Styles</div>
+                    <div class="prop-tab-btn" data-tab="events-tab-content">Events</div>
+                </div>
+                
+                <!-- Properties Tab Content -->
+                <div class="prop-tab-content active" id="properties-tab-content">
+                    <div id="noSelectionMessage" class="text-center p-3">
+                        <i data-feather="info" class="text-secondary mb-2"></i>
+                        <p class="text-muted">Select an element to edit its properties</p>
+                    </div>
+                    <div id="propertyControls" class="property-controls d-none">
+                        <!-- Properties will be dynamically populated here -->
+                    </div>
+                </div>
+                
+                <!-- Styles Tab Content -->
+                <div class="prop-tab-content" id="styles-tab-content">
+                    <div class="property-panel-section">
+                        <div class="property-panel-section-header">
+                            <span class="property-panel-title">Layout</span>
+                        </div>
+                        <div class="style-layout-controls pt-2">
+                            <!-- Layout controls will be populated dynamically -->
+                            <p class="text-center text-muted">Select an element to edit its styles</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Events Tab Content -->
+                <div class="prop-tab-content" id="events-tab-content">
+                    <div class="property-panel-section">
+                        <div class="property-panel-section-header">
+                            <span class="property-panel-title">Event Handlers</span>
+                            <button class="btn btn-sm btn-icon" id="addEventBtn">
+                                <i data-feather="plus"></i>
+                            </button>
+                        </div>
+                        <div class="event-handlers-list pt-2">
+                            <!-- Event handlers will be populated dynamically -->
+                            <p class="text-center text-muted">Select an element to add event handlers</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- App Settings Section (Always visible at bottom) -->
+                <div class="app-settings">
+                    <div class="property-panel-section-header">
+                        <span class="property-panel-title">App Settings</span>
+                    </div>
+                    <div class="app-settings-content">
+                        <div class="mb-3">
+                            <label for="appName" class="form-label">App Name</label>
+                            <input type="text" class="form-control" id="appName" placeholder="My App">
+                        </div>
+                        <div class="mb-3">
+                            <label for="appPackage" class="form-label">Package Name</label>
+                            <input type="text" class="form-control" id="appPackage" placeholder="com.example.myapp">
+                            <small class="text-muted">Must be in format: com.example.myapp</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="appVersion" class="form-label">Version</label>
+                            <input type="text" class="form-control" id="appVersion" placeholder="1.0.0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">App Icon</label>
+                            <div class="d-flex align-items-center">
+                                <div class="app-icon-preview me-3">
+                                    <i data-feather="image" style="width: 48px; height: 48px;"></i>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm" id="uploadIconBtn">Upload Icon</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label d-flex justify-content-between">
+                                <span>Splash Screen</span>
+                                <div class="form-check form-switch d-inline">
+                                    <input class="form-check-input" type="checkbox" id="splashScreenToggle">
+                                </div>
+                            </label>
+                            <button class="btn btn-outline-secondary btn-sm w-100" id="customizeSplashBtn" disabled>
+                                Customize Splash Screen
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Project Modal -->
+    <div class="modal fade" id="newProjectModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create New Project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="newAppName" class="form-label">App Name</label>
+                        <input type="text" class="form-control" id="newAppName" placeholder="My App">
+                    </div>
+                    <div class="mb-3">
+                        <label for="newAppPackage" class="form-label">Package Name</label>
+                        <input type="text" class="form-control" id="newAppPackage" placeholder="com.example.myapp">
+                        <small class="text-muted">Must be in format: com.example.myapp</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="templateSelect" class="form-label">Template</label>
+                        <select class="form-select" id="templateSelect">
+                            <option value="blank">Blank App</option>
+                            <option value="basic">Basic Navigation App</option>
+                            <option value="tabs">Tabbed App</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="createProjectBtn">Create Project</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Project Modal -->
+    <div class="modal fade" id="loadProjectModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Load Project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="projectList" class="list-group">
+                        <!-- Projects will be populated here -->
+                        <div class="text-center p-3 d-none" id="noProjectsMessage">
+                            <p class="text-muted">No saved projects found</p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <label for="importProject" class="form-label">Import Project</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control" id="importProject" accept=".zeroapp">
+                            <button class="btn btn-outline-secondary" type="button" id="importProjectBtn">Import</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export APK Modal -->
+    <div class="modal fade" id="exportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Export APK</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <h6>Before exporting your APK</h6>
+                        <p>To publish your app on the Google Play Store, you'll need:</p>
+                        <ul>
+                            <li>A Google Developer account (one-time $25 fee)</li>
+                            <li>App icon and screenshots</li>
+                            <li>App description and metadata</li>
+                        </ul>
+                        <p>The APK generated is free, but Play Store publishing requires the developer account fee.</p>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Keystore for signing APK</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="keystoreOption" id="newKeystore" checked>
+                            <label class="form-check-label" for="newKeystore">
+                                Generate new keystore (recommended)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="keystoreOption" id="existingKeystore">
+                            <label class="form-check-label" for="existingKeystore">
+                                Use existing keystore
+                            </label>
+                        </div>
+                    </div>
+                    <div id="newKeystoreOptions">
+                        <div class="mb-3">
+                            <label for="keystorePassword" class="form-label">Keystore Password</label>
+                            <input type="password" class="form-control" id="keystorePassword">
+                            <small class="text-muted">Remember this password for future updates</small>
+                        </div>
+                    </div>
+                    <div id="existingKeystoreOptions" class="d-none">
+                        <div class="mb-3">
+                            <label for="uploadKeystore" class="form-label">Upload Keystore</label>
+                            <input type="file" class="form-control" id="uploadKeystore">
+                        </div>
+                        <div class="mb-3">
+                            <label for="existingKeystorePassword" class="form-label">Keystore Password</label>
+                            <input type="password" class="form-control" id="existingKeystorePassword">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="generateApkBtn">Generate APK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help Guide</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="accordion" id="helpAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                    Getting Started
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    <p>ZeroApp Builder lets you create Android apps at no cost. Here's how to get started:</p>
+                                    <ol>
+                                        <li>Create a new project by clicking "New Project" in the navigation bar</li>
+                                        <li>Fill in your app details like name and package</li>
+                                        <li>Drag components from the left sidebar onto the canvas</li>
+                                        <li>Configure each component using the properties panel on the right</li>
+                                        <li>Add multiple screens if needed using the screen selector dropdown</li>
+                                        <li>When finished, click "Export APK" to generate your Android app file</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                    Building Your App
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    <p>The app builder works on a drag-and-drop principle:</p>
+                                    <ul>
+                                        <li>Left sidebar: Component library - drag items onto the canvas</li>
+                                        <li>Center: Canvas - visual representation of your app</li>
+                                        <li>Right sidebar: Properties - customize the selected component</li>
+                                    </ul>
+                                    <p>Tips for building:</p>
+                                    <ul>
+                                        <li>Start with containers and layout components</li>
+                                        <li>Add UI elements like buttons and text</li>
+                                        <li>Use the navigation component to link between screens</li>
+                                        <li>Preview your app in different device sizes with the preview buttons</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                    Publishing to Play Store
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    <p>After exporting your APK, you'll need to:</p>
+                                    <ol>
+                                        <li>Create a Google Developer account ($25 one-time fee)</li>
+                                        <li>Sign in to the Google Play Console</li>
+                                        <li>Create a new app listing</li>
+                                        <li>Fill in app metadata (descriptions, screenshots, icon)</li>
+                                        <li>Set up app pricing and distribution (select Free)</li>
+                                        <li>Upload the signed APK file from ZeroApp Builder</li>
+                                        <li>Submit for review</li>
+                                    </ol>
+                                    <p>Google typically reviews apps within a few days before they appear on the Play Store.</p>
+                                    <p><strong>Important:</strong> Keep your keystore file safe! You'll need the same keystore for future app updates.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                    Limitations & FAQ
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#helpAccordion">
+                                <div class="accordion-body">
+                                    <h6>What are the limitations?</h6>
+                                    <ul>
+                                        <li>Simple apps with basic functionality only</li>
+                                        <li>Limited access to advanced device features</li>
+                                        <li>No custom native code insertion</li>
+                                        <li>Basic design capabilities</li>
+                                    </ul>
+                                    <h6>Is it really free?</h6>
+                                    <p>ZeroApp Builder is completely free to use, with no hidden charges for app creation or APK generation. However, to publish on Google Play Store, you need a Google Developer account ($25 one-time fee).</p>
+                                    <h6>Can I monetize my app?</h6>
+                                    <p>Yes, you can include ad components and monetize your app through ad networks or make it a paid app on the Play Store.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Processing Modal -->
+    <div class="modal fade" id="processingModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-4">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h5 id="processingMessage">Processing...</h5>
+                    <p class="text-muted" id="processingDetails">This may take a few moments</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI Assistant Modal -->
+    <div class="modal fade" id="aiAssistModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i data-feather="cpu" class="me-2"></i>
+                        AI Assistant
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ai-assistant-container">
+                        <div class="ai-message-box mb-4">
+                            <div class="ai-avatar">
+                                <i data-feather="cpu"></i>
+                            </div>
+                            <div class="ai-message animate__animated animate__fadeIn">
+                                <h6>Hello! I'm your AI Assistant.</h6>
+                                <p>I can help you build your app by providing suggestions and answering questions. What would you like assistance with today?</p>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-suggestions">
+                            <h6 class="mb-3">I can help you with:</h6>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="ai-suggestion-card" data-suggestion="layout">
+                                        <div class="suggestion-icon">
+                                            <i data-feather="layout"></i>
+                                        </div>
+                                        <div class="suggestion-content">
+                                            <h6>Layout Design</h6>
+                                            <p>Tips for organizing your app screens</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="ai-suggestion-card" data-suggestion="navigation">
+                                        <div class="suggestion-icon">
+                                            <i data-feather="navigation"></i>
+                                        </div>
+                                        <div class="suggestion-content">
+                                            <h6>App Navigation</h6>
+                                            <p>Creating screen flows and menus</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="ai-suggestion-card" data-suggestion="components">
+                                        <div class="suggestion-icon">
+                                            <i data-feather="grid"></i>
+                                        </div>
+                                        <div class="suggestion-content">
+                                            <h6>Component Usage</h6>
+                                            <p>Best practices for UI elements</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="ai-suggestion-card" data-suggestion="publishing">
+                                        <div class="suggestion-icon">
+                                            <i data-feather="upload-cloud"></i>
+                                        </div>
+                                        <div class="suggestion-content">
+                                            <h6>Publishing Guide</h6>
+                                            <p>Steps to publish to Google Play</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ai-chat-input mt-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="aiQueryInput" placeholder="Ask me anything about building your app...">
+                                <button class="btn btn-primary" type="button" id="aiSubmitBtn">
+                                    <i data-feather="send"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="aiResponseArea" class="mt-4 d-none">
+                            <div class="ai-response-loading text-center mb-3 d-none">
+                                <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <span class="ms-2">Thinking...</span>
+                            </div>
+                            <div class="ai-response-content animate__animated animate__fadeIn">
+                                <!-- AI responses will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/builder.js"></script>
+    <script src="js/projectManager.js"></script>
+    <script src="js/apkGenerator.js"></script>
+    <script src="js/fileExplorer.js"></script>
+    <script src="js/assetManager.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Initialize app when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+            initializeApp();
+            
+            // Initialize file explorer
+            window.fileExplorer.initialize();
+            
+            // Initialize asset manager
+            window.assetManager.initialize();
+        });
+    </script>
+</body>
+</html>
